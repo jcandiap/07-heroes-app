@@ -2,14 +2,21 @@ import userEvent from '@testing-library/user-event';
 import { useContext } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../auth/authContext';
+import { types } from '../../types/types';
 
 export const Navbar = () => {
+
+    const { dispatch } = useContext( AuthContext );
 
     const { user } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
     const handleLogout = () => {
+        dispatch({
+            type: types.logout
+        });
+
         navigate('/login', {
             replace: true
         });
